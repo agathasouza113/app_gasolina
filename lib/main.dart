@@ -4,14 +4,50 @@ void main() => runApp(MaterialApp(
   home: GasolinaApp(),
 ));
 
-class GasolinaApp extends StatelessWidget{
-  String _resultado = "";
-  void _calcular(){
+class GasolinaApp extends StatefulWidget{
+  @override
+  _GasolinaAppState createState() => _GasolinaAppState();
+}
 
+class _GasolinaAppState extends State<GasolinaApp>{
+
+  final TextEditingController _gasolinaController = TextEditingController();
+  final TextEditingController _etanolController = TextEditingController();
+
+  String _resultado = "";
+  
+static const Color corFundo = Color(0xFF121212);   
+static const Color corCard = Color(0xFF1E1E1E);    
+static const Color corPrimaria = Color(0xFFFF5A1F); 
+static const Color corSecundaria = Color(0xFFFFC857); 
+static const Color corTexto = Color(0xFFFFFFFF);   
+static const Color corTextoCinza = Color(0xFFB0B0B0); 
+static const Color corBorda = Color(0xFF2A2A2A); 
+
+void _calcular(){
+    final double etanol = double.tryParse(_etanolController.text)?? 0.0;
+    final double gasolina = double.tryParse(_gasolinaController.text)?? 0.0;
+    final double coef = etanol/gasolina;
+    final String coefString = coef <= 0.7 ? 'Etanol' : 'Gasolina';
+
+    if(etanol <= 0 && gasolina <= 0) {
+      setState((){
+        _resultado = "Informe o valor dos combustíveis";
+      });
+    }
+    
+    if(coef > 0.7 ){
+      _resultado = "Abasteça com Gasolina";
+    } else coefString ;{
+      _resultado = "Abasteça com Etanol";
+    };
   }
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
+
+      backgroundColor: corFundo,
       appBar: AppBar(
         title: Text("Calculadora de combustível"),
       ),
@@ -64,6 +100,15 @@ class GasolinaApp extends StatelessWidget{
           ],
         ),
       ),
+    );
+  }
+  Widget _buildCampo({
+    required TextEditingController controller,
+    required String label,
+    required IconData icone,
+  }) {
+    return TextField(
+
     );
   }
 }
