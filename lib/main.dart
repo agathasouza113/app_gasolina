@@ -16,7 +16,7 @@ class _GasolinaAppState extends State<GasolinaApp>{
 
   String _resultado = "";
   
-static const Color corFundo = Color(0xFF121212);   
+static const Color corFundo = Color.fromARGB(255, 255, 255, 255);   
 static const Color corCard = Color(0xFF1E1E1E);    
 static const Color corPrimaria = Color(0xFFFF5A1F); 
 static const Color corSecundaria = Color(0xFFFFC857); 
@@ -28,7 +28,7 @@ void _calcular(){
     final double etanol = double.tryParse(_etanolController.text)?? 0.0;
     final double gasolina = double.tryParse(_gasolinaController.text)?? 0.0;
     final double coef = etanol/gasolina;
-    final String coefString = coef <= 0.7 ? 'Etanol' : 'Gasolina';
+
 
     if(etanol <= 0 && gasolina <= 0) {
       setState((){
@@ -36,11 +36,11 @@ void _calcular(){
       });
     }
     
-    if(coef > 0.7 ){
-      _resultado = "Abasteça com Gasolina";
-    } else coef ;{
-      _resultado = "Abasteça com Etanol";
-    };
+    setState(() {
+      _resultado =  'Coeficiente é ${coef.toStringAsFixed(2)}\n'
+                    'Abasteça com ${coef <= 0.7 ? 'Etanol' : 'Gasolina'}';
+    });
+    
   }
 
   @override
@@ -69,22 +69,10 @@ void _calcular(){
             ),
             SizedBox(height: 10),
             //GASOLINA
-            TextField(
-              decoration: InputDecoration(
-                labelText: "Valor da Gasolina:",
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: TextInputType.number,
-            ),
+            _buildCampo(controller: _gasolinaController, label: 'Etanol', icone: Icons.gas_meter),
             SizedBox(height: 16),
             //ETANOL
-            TextField(
-              decoration: InputDecoration(
-                labelText: "Valor do Etanol:",
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: TextInputType.number,
-            ),
+            _buildCampo(controller: _etanolController, label: 'Etanol', icone: Icons.gas_meter),
             SizedBox(height: 16),
 
             ElevatedButton(
@@ -108,7 +96,7 @@ void _calcular(){
     required IconData icone,
   }) {
     return TextField(
-
+        controller : controller,
     );
   }
 }
