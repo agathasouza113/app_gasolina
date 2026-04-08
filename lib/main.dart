@@ -16,13 +16,13 @@ class _GasolinaAppState extends State<GasolinaApp>{
 
   String _resultado = "";
   
-static const Color corFundo = Color.fromARGB(255, 255, 255, 255);   
-static const Color corCard = Color(0xFF1E1E1E);    
-static const Color corPrimaria = Color(0xFFFF5A1F); 
-static const Color corSecundaria = Color(0xFFFFC857); 
-static const Color corTexto = Color(0xFFFFFFFF);   
-static const Color corTextoCinza = Color(0xFFB0B0B0); 
-static const Color corBorda = Color(0xFF2A2A2A); 
+static const Color corFundo = Color (0xFFF5EFEF);   
+static const Color corCard = Color(0xFFD9A1A1);    
+static const Color corPrimaria = Color(0xFF7A4A57); 
+static const Color corSecundaria = Color(0xFFB8A5AB); 
+static const Color corTexto = Color(0xFF2E2E2E);   
+static const Color corTextoCinza = Color(0xFF7A7A7A); 
+static const Color corBorda = Color(0xFFE3D6D6); 
 
 void _calcular(){
     final double etanol = double.tryParse(_etanolController.text)?? 0.0;
