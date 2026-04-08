@@ -38,7 +38,7 @@ void _calcular(){
     
     if(coef > 0.7 ){
       _resultado = "Abasteça com Gasolina";
-    } else coefString ;{
+    } else coef ;{
       _resultado = "Abasteça com Etanol";
     };
   }
